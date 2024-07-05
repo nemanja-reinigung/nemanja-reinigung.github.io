@@ -64,6 +64,19 @@
             display: inline-block;
         }
 
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            width: 24px;
+            height: 3px;
+            background-color: white;
+            margin: 5px 0;
+            display: block;
+        }
+
         nav ul {
             padding: 0;
             list-style: none;
@@ -85,6 +98,38 @@
 
         nav ul li a:hover {
             color: var(--secondary-color);
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            nav ul {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                background: var(--primary-color);
+                text-align: left;
+            }
+
+            nav ul.active {
+                display: flex;
+            }
+
+            nav ul li {
+                display: block;
+                margin: 0;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            }
+
+            nav ul li a {
+                display: block;
+                padding: 10px 20px;
+            }
         }
 
         .hero {
@@ -146,7 +191,7 @@
         }
 
         .hero-content h1 {
-            font-size: 4em;
+            font-size: 3em;
             margin-bottom: 20px;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
@@ -411,6 +456,15 @@
             .why-choose-us ul {
                 max-width: 100%;
             }
+
+            .hero-content h1 {
+                font-size: 2.5em;
+            }
+
+            .cta-button {
+                font-size: 16px;
+                padding: 12px 20px;
+            }
         }
     </style>
 </head>
@@ -419,7 +473,12 @@
         <nav>
             <div class="container">
                 <img src="logo.png" alt="Logo" class="logo">
-                <ul>
+                <div class="menu-toggle" id="menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <ul id="nav-menu">
                     <li><a href="#home">Home</a></li>
                     <li><a href="#services">Dienstleistungen</a></li>
                     <li><a href="#about">Über uns</a></li>
@@ -513,7 +572,7 @@
                     <ul>
                         <li><a href="#home">Home</a></li>
                         <li><a href="#services">Dienstleistungen</a></li>
-                        <li><li><a href="#about">Über uns</a></li>
+                        <li><a href="#about">Über uns</a></li>
                         <li><a href="#contact">Kontakt</a></li>
                     </ul>
                 </div>
@@ -552,6 +611,14 @@
                     behavior: 'smooth'
                 });
             });
+        });
+
+        // Menu toggle for mobile
+        const menuToggle = document.getElementById('menu-toggle');
+        const navMenu = document.getElementById('nav-menu');
+
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
         });
 
         // Simple form validation
